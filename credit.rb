@@ -45,7 +45,6 @@ class Credit
     	results_arr << {month: term + 1, main_pay: main_pay.round(2), repayment: repayment.round(2), all_pays: full_month_pay.round(2), balance: balance.round(2)}
 
     end
- 
 
   	results_arr << {month: '', main_pay: '', repayment: all_perc.round(2), all_pays: all_pays.round(2), balance: ''}
   end
@@ -54,6 +53,33 @@ class Credit
 		#summa*(((perc.to_f/100)/12)*term)
 						
 		#			end				
+	def standart_calc
+		results_arr = Array.new
+
+		main_pay = @summa.to_f/@term 
+		perc_per_month = @perc /100 /12
+		balance = @summa
+
+		all_perc = 0
+		all_pays = 0
+
+		@term.times do |term|
+
+			repayment = balance *perc_per_month
+			full_month_pay = main_pay + repayment
+			balance -= main_pay
+
+			all_perc += repayment
+			all_pays += full_month_pay
+
+			results_arr << {month: term + 1, main_pay: main_pay.round(2), repayment: repayment.round(2), all_pays: full_month_pay.round(2), balance: balance.round(2)}
+
+    end
+
+  	results_arr << {month: '', main_pay: '', repayment: all_perc.round(2), all_pays: all_pays.round(2), balance: ''}
+  end
+
+
 end
 
 
