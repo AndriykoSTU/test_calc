@@ -1,0 +1,45 @@
+  <<!DOCTYPE html>
+<html>
+<title>Результати</title>
+
+
+<% if defined?(params) %>
+<% arr = Credit.new(params["summa"], params["perc"], params["term"], params["howtopay"]).cred %>
+
+<% end %>
+
+<style type="text/css">
+   TABLE {
+    width: auto;
+    border-collapse: collapse;
+   }
+   TD, TH {
+    padding: 10px; /* навколо тексту */
+    border: 2px solid black; 
+   }
+ 
+  </style>
+ </head>
+ <body>
+ 
+  
+   <table>
+   <tr>
+    <th>Номер місяця</th><th>Погашення кредиту</th><th>Погашення %</th><th>Загальний внесок</th><th>Залишок кредиту</th>
+   </tr>
+   <% arr.each do |el| %>
+          <%= "<tr>
+            <td>#{el[:term]}</td>
+            <td>#{el[:main_pay]}</td>
+            <td>#{el[:repayment]}</td>
+            <td>#{el[:all_pays]}</td>
+            <td>#{el[:balance]}</td>
+          </tr>" %>
+          <% end %>
+          </table>
+  
+ 
+
+  
+ </body>
+</html>

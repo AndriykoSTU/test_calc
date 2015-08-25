@@ -2,8 +2,8 @@ class Credit
 
 
 	def initialize(summa, term, perc, howtopay)
-		@summa    = summa
-		@term     = term
+		@summa    = summa.to_f
+		@term     = term.to_i
 		@perc     = perc.to_f
 		@howtopay = howtopay
 	end	
@@ -17,7 +17,6 @@ class Credit
 			standart_calc
 		end
 	end
-
 
 
 	def annuitet_calc
@@ -42,17 +41,20 @@ class Credit
       all_perc += repayment
     	all_pays += full_month_pay
     
-    	results_arr << {month: term + 1, main_pay: main_pay.round(2), repayment: repayment.round(2), all_pays: full_month_pay.round(2), balance: balance.round(2)}
+    	results_arr << {term: term + 1, main_pay: main_pay.round(2), 
+    		repayment: repayment.round(2), all_pays: full_month_pay.round(2), balance: balance.round(2)}
 
     end
 
-  	results_arr << {month: '', main_pay: '', repayment: all_perc.round(2), all_pays: all_pays.round(2), balance: ''}
+  	results_arr << {term: '', main_pay: '', repayment: all_perc.round(2),
+  	 all_pays: all_pays.round(2), balance: ''}
   end
 
 
 		#summa*(((perc.to_f/100)/12)*term)
 						
-		#			end				
+		#			end		
+			
 	def standart_calc
 		results_arr = Array.new
 
@@ -72,20 +74,15 @@ class Credit
 			all_perc += repayment
 			all_pays += full_month_pay
 
-			results_arr << {month: term + 1, main_pay: main_pay.round(2), repayment: repayment.round(2), all_pays: full_month_pay.round(2), balance: balance.round(2)}
+			results_arr << {term: term + 1, main_pay: main_pay.round(2), repayment: repayment.round(2), 
+				all_pays: full_month_pay.round(2), balance: balance.round(2)}
 
     end
 
-  	results_arr << {month: '', main_pay: '', repayment: all_perc.round(2), all_pays: all_pays.round(2), balance: ''}
+  	results_arr << {term: '', main_pay: '', repayment: all_perc.round(2), 
+  		all_pays: all_pays.round(2), balance: ''}
   end
 
 
 end
 
-
-arr = Credit.new(1000, 12, 10, 'annuitet').cred
-
-arr.each do |el|
-	print el[:term]
-	puts el
-end
